@@ -54,4 +54,11 @@ static void saveRepository()
 		coll.insert(doc1);
 	}
 }
+static void retrieveFromRepository(String u,String p)
+{
+	BasicDBObject whereQuery = new BasicDBObject();
+	whereQuery.put("username", u);
+	
+	
+}
 }

@@ -92,7 +92,7 @@ public void actionPerformed(ActionEvent arg0)
 	}
 	else
 	{
-		
+		Repository.retrieveFromRepository(tf1.getText(),tf2.getText());
 	}
 }
 
