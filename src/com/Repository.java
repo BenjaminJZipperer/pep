@@ -7,6 +7,10 @@ import java.util.Set;
 
 import com.mongodb.MongoClient; // the client
 import com.mongodb.*; // top-level
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JOptionPane;
 
 
 public class Repository {
@@ -40,7 +44,7 @@ public static boolean init() throws UnknownHostException
 static void fillRepository()
 {
 	// folgende
-	System.out.println("folgende ELemente sind im Repository");
+	System.out.println("folgende Elemente sind im Repository");
 	users = Hauptapp.testArray();
 	
 }
@@ -52,6 +56,7 @@ static void saveRepository()
 		.append("password", u.getPassword())
 		.append("personal-id", u.getFid());
 		coll.insert(doc1);
+		
 	}
 }
 static void retrieveFromRepository(String u,String p)
@@ -59,6 +64,31 @@ static void retrieveFromRepository(String u,String p)
 	BasicDBObject whereQuery = new BasicDBObject();
 	whereQuery.put("username", u);
 	
-	
+	DBCursor cursor = coll.find(whereQuery); // get ALL 
+	while(cursor.hasNext())
+	{
+		String treffer = "";
+		treffer=cursor.next().toString();
+		// check with regex if password is contained:
+		String regex = p;
+		Pattern p1 = Pattern.compile(regex);
+		Matcher matcher = p1.matcher(treffer);
+		if(matcher.find())
+		{
+			Object[] options = { "Ok" };
+			JOptionPane.showOptionDialog(null, "Identifikation abgeschlossen! Hallo "+u, "Meldung",
+			JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+			null, options, options[0]);
+			return;
+		}
+		else
+		{
+			
+		}
+	}
+	Object[] options = { "OK", "CANCEL" };
+	JOptionPane.showOptionDialog(null, "Nicht identifizierter Benutzer!", "Warnung",
+	JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+	null, options, options[0]);
 }
 }

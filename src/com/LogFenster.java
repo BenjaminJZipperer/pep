@@ -69,6 +69,7 @@ public void actionPerformed(ActionEvent arg0)
 	    counter++;
 		Repository.fillRepository();
 		Repository.saveRepository();
+		this.dispose();
 		
 		}else
 		{
