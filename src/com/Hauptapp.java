@@ -1,18 +1,23 @@
 package com;
 
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Hauptapp {
 public static User[] benutzer = new User[9];
-public static void main(String[] ard)
+public static void main(String[] ard) throws UnknownHostException
 {
+	System.out.println("Starte Testprozedur - Anlegen von 2 Testusern: ");
 	User users[] = new User[3];
-	users[1] = new User("Benjamin","garfield");
+	users[1] = new User("Benjamin","stackholder");
 	System.out.println(users[1].toString());
 	users[2] = new User("admin","password");
 	System.out.println(users[2].toString());
 	// 15 Minuten
+	
+	// Tag 2
+	Repository.init();
 	
 	// STarte die AWT Event Schlange 
 	java.awt.EventQueue.invokeLater(new Runnable() {
